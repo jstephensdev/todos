@@ -1,0 +1,15 @@
+body {
+    background-color: #eceff0;
+}
+.centeringContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+input {
+    font: 1em;
+    font-family: 'Montserrat';
+    color: #363639;
+}

@@ -55,14 +55,16 @@ function App() {
 
     return (
         <div className="centeringContainer">
-            <h1>Todo App</h1>
             <div>
-                <input
-                    type="text"
-                    value={newTodo}
-                    onChange={(e) => setNewTodo(e.target.value)}
-                />
-                <button onClick={handleAddTodo}>Add Todo</button>
+                <div>
+                    <h1>Todo App</h1>
+                    <input
+                        type="text"
+                        value={newTodo}
+                        onChange={(e) => setNewTodo(e.target.value)}
+                    />
+                    <button onClick={handleAddTodo}>Add Todo</button>
+                </div>
 
                 <ul>
                     {todos.map((todo) => (
