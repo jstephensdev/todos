@@ -3,11 +3,10 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
-    "type": "module",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start-server": "node ./server/server.js",
-        "start-client": "webpack-dev-server --config webpack.config.js --mode development",
+        "server": "node ./server/server.js",
+        "client": "webpack-dev-server --config webpack.config.js --mode development",
         "start": "npm run start-server & npm run start-client",
         "prettier": "npx prettier . --write"
     },
