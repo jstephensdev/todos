@@ -8,7 +8,8 @@
         "server": "node ./server/server.js",
         "client": "webpack-dev-server --config webpack.config.js --mode development",
         "start": "npm run start-server & npm run start-client",
-        "prettier": "npx prettier . --write"
+        "prettier": "npx prettier . --write",
+        "build": "webpack --config webpack.config.js"
     },
     "keywords": [],
     "author": "",
