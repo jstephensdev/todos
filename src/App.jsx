@@ -18,14 +18,14 @@ function App() {
     }, [])
 
     const fetchTodos = async () => {
-        const response = await fetch('http://localhost:5002/todos')
+        const response = await fetch('http://localhost:5002/todos/todos')
         const data = await response.json()
         dispatch(setTodos(data))
     }
 
     const handleAddTodo = async () => {
         if (newTodo.trim() !== '') {
-            const response = await fetch('http://localhost:5002/todos', {
+            const response = await fetch('http://localhost:5002/todos/todos', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ function App() {
     }
 
     const handleToggleTodo = async (id) => {
-        const response = await fetch(`http://localhost:5002/todos/${id}`, {
+        const response = await fetch(`http://localhost:5002/todos/todos/${id}`, {
             method: 'PATCH',
         })
         const data = await response.json()
@@ -47,7 +47,7 @@ function App() {
     }
 
     const handleDeleteTodo = async (id) => {
-        await fetch(`http://localhost:5002/todos/${id}`, {
+        await fetch(`http://localhost:5002/todos/todos/${id}`, {
             method: 'DELETE',
         })
         dispatch(deleteTodo({ id }))
@@ -56,16 +56,13 @@ function App() {
     return (
         <div className="centeringContainer">
             <div>
-                <div>
-                    <h1>Todo App</h1>
-                    <input
-                        type="text"
-                        value={newTodo}
-                        onChange={(e) => setNewTodo(e.target.value)}
-                    />
-                    <button onClick={handleAddTodo}>Add Todo</button>
-                </div>
-
+                <h1>Todo App</h1>
+                <input
+                    type="text"
+                    value={newTodo}
+                    onChange={(e) => setNewTodo(e.target.value)}
+                />
+                <button onClick={handleAddTodo}>Add Todo</button>
                 <ul>
                     {todos.map((todo) => (
                         <li key={todo.id}>
