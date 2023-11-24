@@ -8,6 +8,27 @@ body {
     min-height: 100vh;
 }
 
+.appContainer {
+    border: solid 1px black;
+    padding: 20px;
+    background-color: white;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+span {
+    padding: 5px;
+}
+
+li {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
 input {
     font: 1em;
     font-family: 'Montserrat';

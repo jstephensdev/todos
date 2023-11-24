@@ -39,9 +39,12 @@ function App() {
     }
 
     const handleToggleTodo = async (id) => {
-        const response = await fetch(`http://localhost:5002/todos/todos/${id}`, {
-            method: 'PATCH',
-        })
+        const response = await fetch(
+            `http://localhost:5002/todos/todos/${id}`,
+            {
+                method: 'PATCH',
+            }
+        )
         const data = await response.json()
         dispatch(toggleTodo(data))
     }
@@ -55,7 +58,7 @@ function App() {
 
     return (
         <div className="centeringContainer">
-            <div>
+            <div className="appContainer">
                 <h1>Todo App</h1>
                 <input
                     type="text"
