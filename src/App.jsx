@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     setTodos,
     addTodo,
     toggleTodo,
     deleteTodo,
-} from './store/slices/todoSlice'
-import './App.css'
+} from './store/slices/todoSlice';
+import './App.css';
 
 function App() {
-    const [newTodo, setNewTodo] = useState('')
-    const dispatch = useDispatch()
-    const todos = useSelector((state) => state.todos.items)
+    const [newTodo, setNewTodo] = useState('');
+    const dispatch = useDispatch();
+    const todos = useSelector((state) => state.todos.items);
 
     useEffect(() => {
-        fetchTodos()
-    }, [])
+        fetchTodos();
+    }, []);
 
     const fetchTodos = async () => {
-        const response = await fetch('http://localhost:5002/todos/todos')
-        const data = await response.json()
-        dispatch(setTodos(data))
-    }
+        const response = await fetch('http://localhost:5002/todos/todos');
+        const data = await response.json();
+        dispatch(setTodos(data));
+    };
 
     const handleAddTodo = async () => {
         if (newTodo.trim() !== '') {
@@ -31,12 +31,12 @@ function App() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ text: newTodo }),
-            })
-            const data = await response.json()
-            dispatch(addTodo(data))
-            setNewTodo('')
+            });
+            const data = await response.json();
+            dispatch(addTodo(data));
+            setNewTodo('');
         }
-    }
+    };
 
     const handleToggleTodo = async (id) => {
         const response = await fetch(
@@ -44,17 +44,17 @@ function App() {
             {
                 method: 'PATCH',
             }
-        )
-        const data = await response.json()
-        dispatch(toggleTodo(data))
-    }
+        );
+        const data = await response.json();
+        dispatch(toggleTodo(data));
+    };
 
     const handleDeleteTodo = async (id) => {
         await fetch(`http://localhost:5002/todos/todos/${id}`, {
             method: 'DELETE',
-        })
-        dispatch(deleteTodo({ id }))
-    }
+        });
+        dispatch(deleteTodo({ id }));
+    };
 
     return (
         <div className="centeringContainer">
@@ -91,7 +91,7 @@ function App() {
                 </ul>
             </div>
         </div>
-    )
+    );
 }
 
-export default App
+export default App;
