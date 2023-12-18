@@ -8,17 +8,17 @@ this is a work in progress todo app project.
 4. Express
 5. Postgresql
 
-## Features:
-
-1. connects to a postgresql database
-2. preform CRUD operations on todos
-
-## To Use:
+## Running Locally:
 
 1. make sure postgresql is running on the connection port ( if needed, adjust the connection in server/modules/pool.js )
 2. open two seperate terminals
 3. in one, run: npm run server
 4. in the other, run: npm run client
+
+## Features:
+
+1. connects to a postgresql database
+2. preform CRUD operations on todos
 
 ## Things to Improve or Todo:
 
