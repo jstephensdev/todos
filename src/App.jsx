@@ -18,7 +18,7 @@ function App() {
     }, []);
 
     const fetchTodos = async () => {
-        const response = await fetch('http://localhost:5002/todos/todos');
+        const response = await fetch('http://localhost:5002/todos');
         const data = await response.json();
         dispatch(setTodos(data));
     };
@@ -49,6 +49,21 @@ function App() {
         dispatch(toggleTodo(data));
     };
 
+    const handleUpdateTodo = async (id, text) => {
+        console.log( id, text )
+        await fetch(
+            `http://localhost:5002/todos/todos/${id}`,
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({text: text}),
+            }
+        );
+        fetchTodos();
+    };
+
     const handleDeleteTodo = async (id) => {
         await fetch(`http://localhost:5002/todos/todos/${id}`, {
             method: 'DELETE',
@@ -59,7 +74,16 @@ function App() {
     return (
         <div className="centeringContainer">
             <div className="appContainer">
-                <h1>Todo App</h1>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                    }}
+                >
+                    <h1>Todo App</h1>
+                    <h2>({todos.length})</h2>
+                </div>
                 <input
                     type="text"
                     value={newTodo}
@@ -74,15 +98,22 @@ function App() {
                                 checked={todo.completed}
                                 onChange={() => handleToggleTodo(todo.id)}
                             />
-                            <span
+                            <input
+                                type="text"
                                 style={{
                                     textDecoration: todo.completed
                                         ? 'line-through'
                                         : 'none',
+                                    border: 'none',
                                 }}
-                            >
-                                {todo.text}
-                            </span>
+                                defaultValue={todo.text}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        handleUpdateTodo(todo.id, e.target.value);
+                                    }
+                                }}
+                            />
+
                             <button onClick={() => handleDeleteTodo(todo.id)}>
                                 Delete
                             </button>
