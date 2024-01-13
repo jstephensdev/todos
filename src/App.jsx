@@ -5,6 +5,7 @@ import {
     addTodo,
     toggleTodo,
     deleteTodo,
+    updateTodo,
 } from './store/slices/todoSlice';
 import './App.css';
 
@@ -50,8 +51,7 @@ function App() {
     };
 
     const handleUpdateTodo = async (id, text) => {
-        console.log( id, text )
-        await fetch(
+         const response = await fetch(
             `http://localhost:5002/todos/todos/${id}`,
             {
                 method: 'PUT',
@@ -61,7 +61,8 @@ function App() {
                 body: JSON.stringify({text: text}),
             }
         );
-        fetchTodos();
+        const data = await response.json();
+        dispatch(updateTodo(data));
     };
 
     const handleDeleteTodo = async (id) => {
