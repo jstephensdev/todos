@@ -51,14 +51,14 @@ function App() {
     };
 
     const handleUpdateTodo = async (id, text) => {
-         const response = await fetch(
+        const response = await fetch(
             `http://localhost:5002/todos/todos/${id}`,
             {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({text: text}),
+                body: JSON.stringify({ text: text }),
             }
         );
         const data = await response.json();
@@ -89,6 +89,12 @@ function App() {
                     type="text"
                     value={newTodo}
                     onChange={(e) => setNewTodo(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            console.log('here');
+                            handleAddTodo();
+                        }
+                    }}
                 />
                 <button onClick={handleAddTodo}>Add Todo</button>
                 <ul>
@@ -110,13 +116,16 @@ function App() {
                                 defaultValue={todo.text}
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
-                                        handleUpdateTodo(todo.id, e.target.value);
+                                        handleUpdateTodo(
+                                            todo.id,
+                                            e.target.value
+                                        );
                                     }
                                 }}
                             />
 
                             <button onClick={() => handleDeleteTodo(todo.id)}>
-                                Delete
+                                X
                             </button>
                         </li>
                     ))}
